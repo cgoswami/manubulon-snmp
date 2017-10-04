@@ -761,12 +761,12 @@ for ($i = 0; $i < $num_int; $i++) {
     $perf_out
         .= "'"
         . $Pdescr . "'="
-        . round($bu, $UOM_float)
-        . $output_metric . "B;"
+        #. round($bu, $UOM_float)
+        #. $output_metric . "B;"
         . round($pu, 2) . "%;"
-        . round($p_warn, 0) . ";"
-        . round($p_crit, 0) . ";0;"
-        . round($to,     0);
+        #. round($p_warn, 0) . ";"
+        #. round($p_crit, 0) . ";0;"
+        #. round($to,     0);
 }
 
 verb("Perf data : $perf_out");
