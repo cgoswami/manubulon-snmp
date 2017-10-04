@@ -763,6 +763,7 @@ for ($i = 0; $i < $num_int; $i++) {
         . $Pdescr . "'="
         . round($bu, $UOM_float)
         . $output_metric . "B;"
+        . round($pu, 2) . "%;"
         . round($p_warn, 0) . ";"
         . round($p_crit, 0) . ";0;"
         . round($to,     0);
