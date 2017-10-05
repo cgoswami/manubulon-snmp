@@ -604,21 +604,22 @@ if (defined($o_netsnmp)) {
         }
     }
     $n_output .= " ; " . $n_status;
-    if (defined($o_perf)) {
-        if (defined($o_cache)) {
-            $n_output .= " | ram_used=" . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free}) . ";";
-        } else {
-            $n_output .= " | ram_used="
-                . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free} - $$resultat{$nets_ram_cache}) . ";";
-        }
-        $n_output .= ($o_warnR == 0) ? ";" : round($o_warnR * $$resultat{$nets_ram_total} / 100, 0) . ";";
-        $n_output .= ($o_critR == 0) ? ";" : round($o_critR * $$resultat{$nets_ram_total} / 100, 0) . ";";
-        $n_output .= "0;" . $$resultat{$nets_ram_total} . " ";
-        $n_output .= "swap_used=" . ($$resultat{$nets_swap_total} - $$resultat{$nets_swap_free}) . ";";
-        $n_output .= ($o_warnS == 0) ? ";" : round($o_warnS * $$resultat{$nets_swap_total} / 100, 0) . ";";
-        $n_output .= ($o_critS == 0) ? ";" : round($o_critS * $$resultat{$nets_swap_total} / 100, 0) . ";";
-        $n_output .= "0;" . $$resultat{$nets_swap_total};
-    }
+    $n_output .= " | ram_used=$realused" . "%" . " swap_used=$swapused" . "%";
+#    if (defined($o_perf)) {
+#        if (defined($o_cache)) {
+#            $n_output .= " | ram_used=" . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free}) . ";";
+#        } else {
+#            $n_output .= " | ram_used="
+#                . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free} - $$resultat{$nets_ram_cache}) . ";";
+#        }
+#        $n_output .= ($o_warnR == 0) ? ";" : round($o_warnR * $$resultat{$nets_ram_total} / 100, 0) . ";";
+#        $n_output .= ($o_critR == 0) ? ";" : round($o_critR * $$resultat{$nets_ram_total} / 100, 0) . ";";
+#        $n_output .= "0;" . $$resultat{$nets_ram_total} . " ";
+#        $n_output .= "swap_used=" . ($$resultat{$nets_swap_total} - $$resultat{$nets_swap_free}) . ";";
+#        $n_output .= ($o_warnS == 0) ? ";" : round($o_warnS * $$resultat{$nets_swap_total} / 100, 0) . ";";
+#        $n_output .= ($o_critS == 0) ? ";" : round($o_critS * $$resultat{$nets_swap_total} / 100, 0) . ";";
+#        $n_output .= "0;" . $$resultat{$nets_swap_total};
+#    }
     $session->close;
     print "$n_output \n";
     exit $ERRORS{$n_status};
