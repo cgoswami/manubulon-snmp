@@ -758,15 +758,37 @@ for ($i = 0; $i < $num_int; $i++) {
     }
 
     # Performance output (in MB)
+    #  Space Used'=22.77GB; 'C: Utilisation
+    my $hundred = 100;
+    my $pa = abs($hundred - $pu);
+    my $sf = $to - $bu;
     $perf_out
         .= "'"
-        . $Pdescr . "'="
-        #. round($bu, $UOM_float)
-        #. $output_metric . "B;"
-        . round($pu, 2) . "%;"
+        . $Pdescr . " Utilization'="
+        . round($pu, 2) . "% "
+        .= "'"
+        . $Pdescr . " Available'="
+        . round($pa, 2) . "% "
+        .= "'"
+        . $Pdescr . " Space Used'="
+        . round($bu, $UOM_float)
+        . $output_metric . "B' "
         #. round($p_warn, 0) . ";"
         #. round($p_crit, 0) . ";0;"
-        #. round($to,     0);
+        .= "'"
+        . $Pdescr . " Space Free'="
+        . round($sf,     $UOM_float)
+        . $output_metric . "B' ";
+
+
+
+
+
+
+
+
+
+
 }
 
 verb("Perf data : $perf_out");
