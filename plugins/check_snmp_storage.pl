@@ -772,13 +772,13 @@ for ($i = 0; $i < $num_int; $i++) {
         .= "'"
         . $Pdescr . " Space Used'="
         . round($bu, $UOM_float)
-        . $output_metric . "B' "
+        . $output_metric . "B "
         #. round($p_warn, 0) . ";"
         #. round($p_crit, 0) . ";0;"
         .= "'"
         . $Pdescr . " Space Free'="
         . round($sf,     $UOM_float)
-        . $output_metric . "B' ";
+        . $output_metric . "B ";
 
 
 
