@@ -762,6 +762,7 @@ for ($i = 0; $i < $num_int; $i++) {
     my $hundred = 100;
     my $pa = abs($hundred - $pu);
     my $sf = $to - $bu;
+    $Pdescr =~ s/\///g;
     $perf_out
         .= "'"
         . $Pdescr . " Utilization'="
