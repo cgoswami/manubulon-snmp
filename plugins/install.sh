@@ -5,8 +5,8 @@
 # Author  : Patrick Proy ( nagios at proy.org)
 # Help : http://www.manubulon.com/nagios/
 # Licence : GPL - http://www.fsf.org/licenses/gpl.txt
-# TODO : 
-# Contribs : 
+# TODO :
+# Contribs :
 #################################################################
 #
 # USAGE : ./install [<perl script name> | AUTO <dir> <tmp_dir> <perl_dir> [<install_location>] ]
@@ -22,7 +22,7 @@
 # - Install plugins in the plugins directory and modify paths if necessary.
 
 ############################ script list
-PLUGINS="check_snmp_boostedge.pl check_snmp_css.pl check_snmp_linkproof_nhr.pl check_snmp_nsbox.pl check_snmp_vrrp.pl check_snmp_cpfw.pl check_snmp_env.pl check_snmp_load.pl check_snmp_process.pl check_snmp_win.pl check_snmp_css_main.pl check_snmp_int.pl check_snmp_mem.pl check_snmp_storage.pl"
+PLUGINS="check_snmp_boostedge.pl check_snmp_css.pl check_snmp_linkproof_nhr.pl check_snmp_nsbox.pl check_snmp_vrrp.pl check_snmp_cpfw.pl check_snmp_env.pl check_snmp_load.pl check_snmp_process.pl check_snmp_win.pl check_snmp_css_main.pl check_snmp_int.pl check_snmp_mem.pl check_snmp_mem_collect_metrics.pl check_snmp_storage.pl check_snmp_storage_collect_metrics.pl"
 ############################ get script to install or install type
 
 if [ $# -gt 0 ] ; then INSTSCRIPT=$1 ; else INSTSCRIPT="all" ; fi
@@ -248,4 +248,3 @@ else
     fi
     exit 0;
 fi
-

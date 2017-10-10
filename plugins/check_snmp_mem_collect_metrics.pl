@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl -w 
 ############################## check_snmp_mem ##############
 my $VERSION = "2.0.0";
 
@@ -124,13 +124,13 @@ sub help {
 -2, --v2c
    Use snmp v2c
 -l, --login=LOGIN ; -x, --passwd=PASSWD
-   Login and auth password for snmpv3 authentication
-   If no priv password exists, implies AuthNoPriv
+   Login and auth password for snmpv3 authentication 
+   If no priv password exists, implies AuthNoPriv 
 -X, --privpass=PASSWD
    Priv password for snmpv3 (AuthPriv protocol)
 -L, --protocols=<authproto>,<privproto>
    <authproto> : Authentication protocol (md5|sha : default md5)
-   <privproto> : Priv protocole (des|aes : default des)
+   <privproto> : Priv protocole (des|aes : default des) 
 -p, --port=PORT
    SNMP port (Default 161)
 -P, --protocol=PROTOCOL
@@ -140,15 +140,15 @@ sub help {
     'tcp/ipv4'  : TCP over IPv4
     'tcp/ipv6'  : TCP over IPv6
 -w, --warn=INTEGER | INT,INT
-   warning level for memory in percent (0 for no checks)
-     Default (-N switch) : comma separated level for Real Memory and Swap
+   warning level for memory in percent (0 for no checks) 
+     Default (-N switch) : comma separated level for Real Memory and Swap 
      -I switch : warning level
 -c, --crit=INTEGER | INT,INT
    critical level for memory in percent (0 for no checks)
-     Default (-N switch) : comma separated level for Real Memory and Swap
+     Default (-N switch) : comma separated level for Real Memory and Swap 
      -I switch : critical level
 -N, --netsnmp (default)
-   check linux memory & swap provided by Net SNMP
+   check linux memory & swap provided by Net SNMP 
 -m, --memcache
    include cached memory in used memory (only with Net-SNMP)
 -b, --membuffer
@@ -604,21 +604,22 @@ if (defined($o_netsnmp)) {
         }
     }
     $n_output .= " ; " . $n_status;
-    if (defined($o_perf)) {
-        if (defined($o_cache)) {
-            $n_output .= " | ram_used=" . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free}) . ";";
-        } else {
-            $n_output .= " | ram_used="
-                . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free} - $$resultat{$nets_ram_cache}) . ";";
-        }
-        $n_output .= ($o_warnR == 0) ? ";" : round($o_warnR * $$resultat{$nets_ram_total} / 100, 0) . ";";
-        $n_output .= ($o_critR == 0) ? ";" : round($o_critR * $$resultat{$nets_ram_total} / 100, 0) . ";";
-        $n_output .= "0;" . $$resultat{$nets_ram_total} . " ";
-        $n_output .= "swap_used=" . ($$resultat{$nets_swap_total} - $$resultat{$nets_swap_free}) . ";";
-        $n_output .= ($o_warnS == 0) ? ";" : round($o_warnS * $$resultat{$nets_swap_total} / 100, 0) . ";";
-        $n_output .= ($o_critS == 0) ? ";" : round($o_critS * $$resultat{$nets_swap_total} / 100, 0) . ";";
-        $n_output .= "0;" . $$resultat{$nets_swap_total};
-    }
+    $n_output .= " | ram_used=$realused" . "%" . " swap_used=$swapused" . "%";
+#    if (defined($o_perf)) {
+#        if (defined($o_cache)) {
+#            $n_output .= " | ram_used=" . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free}) . ";";
+#        } else {
+#            $n_output .= " | ram_used="
+#                . ($$resultat{$nets_ram_total} - $$resultat{$nets_ram_free} - $$resultat{$nets_ram_cache}) . ";";
+#        }
+#        $n_output .= ($o_warnR == 0) ? ";" : round($o_warnR * $$resultat{$nets_ram_total} / 100, 0) . ";";
+#        $n_output .= ($o_critR == 0) ? ";" : round($o_critR * $$resultat{$nets_ram_total} / 100, 0) . ";";
+#        $n_output .= "0;" . $$resultat{$nets_ram_total} . " ";
+#        $n_output .= "swap_used=" . ($$resultat{$nets_swap_total} - $$resultat{$nets_swap_free}) . ";";
+#        $n_output .= ($o_warnS == 0) ? ";" : round($o_warnS * $$resultat{$nets_swap_total} / 100, 0) . ";";
+#        $n_output .= ($o_critS == 0) ? ";" : round($o_critS * $$resultat{$nets_swap_total} / 100, 0) . ";";
+#        $n_output .= "0;" . $$resultat{$nets_swap_total};
+#    }
     $session->close;
     print "$n_output \n";
     exit $ERRORS{$n_status};

@@ -144,13 +144,13 @@ warn if %used > warn and critical if %used > crit
 -2, --v2c
    Use snmp v2c
 -l, --login=LOGIN ; -x, --passwd=PASSWD
-   Login and auth password for snmpv3 authentication
-   If no priv password exists, implies AuthNoPriv
+   Login and auth password for snmpv3 authentication 
+   If no priv password exists, implies AuthNoPriv 
 -X, --privpass=PASSWD
    Priv password for snmpv3 (AuthPriv protocol)
 -L, --protocols=<authproto>,<privproto>
    <authproto> : Authentication protocol (md5|sha : default md5)
-   <privproto> : Priv protocole (des|aes : default des)
+   <privproto> : Priv protocole (des|aes : default des) 
 -x, --passwd=PASSWD
    Password for snmpv3 authentication
 -p, --port=PORT
@@ -187,10 +187,10 @@ warn if %used > warn and critical if %used > crit
    bu : calculate MegaBytes used
 -w, --warn=INTEGER
    percent / MB of disk used to generate WARNING state
-   you can add the % sign
+   you can add the % sign 
 -c, --critical=INTEGER
    percent / MB of disk used to generate CRITICAL state
-   you can add the % sign
+   you can add the % sign 
 -R, --reserved=INTEGER
    % reserved blocks for superuser
    For ext2/3 filesystems, it is 5% by default
@@ -202,29 +202,29 @@ warn if %used > warn and critical if %used > crit
    <type>: Make the output shorter :
      0 : only print the global result except the disk in warning or critical
          ex: "< 80% : OK"
-     1 : Don't print all info for every disk
+     1 : Don't print all info for every disk 
          ex : "/ : 66 %used  (<  80) : OK"
    <where>: (optional) if = 1, put the OK/WARN/CRIT at the beginning
    <cut>: take the <n> first caracters or <n> last if n<0
 -o, --octetlength=INTEGER
   max-size of the SNMP message, usefull in case of Too Long responses.
   Be carefull with network filters. Range 484 - 65535, default are
-  usually 1472,1452,1460 or 1440.
+  usually 1472,1452,1460 or 1440.   
 -t, --timeout=INTEGER
    timeout for SNMP in seconds (Default: 5)
 -V, --version
    prints version number
-Note :
+Note : 
   with T=pu or T=bu : OK < warn < crit
   with T=pl ot T=bl : crit < warn < OK
-
+  
   If multiple storage are selected, the worse condition will be returned
   i.e if one disk is critical, the return is critical
-
-  example :
-  Browse storage list : <script> -C <community> -H <host> -m <anything> -w 1 -c 2 -v
-  the -m option allows regexp in perl format :
-  Test drive C,F,G,H,I on Windows 	: -m ^[CFGHI]:
+ 
+  example : 
+  Browse storage list : <script> -C <community> -H <host> -m <anything> -w 1 -c 2 -v 
+  the -m option allows regexp in perl format : 
+  Test drive C,F,G,H,I on Windows 	: -m ^[CFGHI]:    
   Test all mounts containing /var      	: -m /var
   Test all mounts under /var      	: -m ^/var
   Test only /var                 	: -m /var -r
@@ -758,14 +758,38 @@ for ($i = 0; $i < $num_int; $i++) {
     }
 
     # Performance output (in MB)
+    #  Space Used'=22.77GB; 'C: Utilisation
+    my $hundred = 100;
+    my $pa = abs($hundred - $pu);
+    my $sf = $to - $bu;
+    $Pdescr =~ s/\///g;
     $perf_out
         .= "'"
-        . $Pdescr . "'="
+        . $Pdescr . " Utilization'="
+        . round($pu, 2) . "% "
+        .= "'"
+        . $Pdescr . " Available'="
+        . round($pa, 2) . "% "
+        .= "'"
+        . $Pdescr . " Space Used'="
         . round($bu, $UOM_float)
-        . $output_metric . "B;"
-        . round($p_warn, 0) . ";"
-        . round($p_crit, 0) . ";0;"
-        . round($to,     0);
+        . $output_metric . "B "
+        #. round($p_warn, 0) . ";"
+        #. round($p_crit, 0) . ";0;"
+        .= "'"
+        . $Pdescr . " Space Free'="
+        . round($sf,     $UOM_float)
+        . $output_metric . "B ";
+
+
+
+
+
+
+
+
+
+
 }
 
 verb("Perf data : $perf_out");
@@ -807,3 +831,4 @@ if (defined($o_shortL[1])) {
 (defined($o_perf)) ? print " | ", $perf_out, "\n" : print "\n";
 
 exit $ERRORS{"OK"};
+
